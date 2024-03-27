@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Amin Kitchen</title>
+    <style>
+        body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     background-color: #f3f1ef;
+   }
+   
+   .container {
+     text-align: center;
+     border: 1px solid #ccc;
+     padding: 20px;
+     width: 80%; /* Adjusted width for responsiveness */
+     max-width: 400px; /* Set a max-width to prevent the container from becoming too wide on larger screens */
+     border-radius: 5px;
+     background-color: rgba(0, 0, 0, 0.11);
+     border-radius: 24px;
+   }
+   
+   .input-group {
+     margin-bottom: 10px;
+   }
+   
+   label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: bold;
+   }
+   
+   input[type="text"] {
+     width: 80%; /* Adjusted width to occupy full width of the container */
+     padding: 8px;
+     border-radius: 3px;
+     border: 1px solid #ccc;
+   }
+   
+   fieldset {
+     border: 10px double black;
+   }
+   
+   legend {
+     font-weight: bolder;
+     font-size: xx-large;
+   }
+   
+   button {
+     padding: 10px 20px;
+     background-color: tomato;
+     color: #fff;
+     border: none;
+     margin: 5px;
+     border-radius: 5px;
+     cursor: pointer;
+   }
+   
+   /* Media Query for smaller screens */
+   @media screen and (max-width: 600px) {
+     .container {
+       width: 90%; /* Adjusted width for smaller screens */
+     }
+   }
+   
+       </style>
+</head>
+<body>
+  <% if(locals.addCat){ %>
+    <div class="container">
+        <form action="/addCategory" method="post">
+         <fieldset>
+           <legend>ADD CATEGORY</legend>
+           <div class="input-group">
+             <label for="categoryName">Category Name</label>
+             <input type="text" id="categoryName" name="categoryName"  required/>
+           </div>
+         </fieldset>
+         <button type="submit">Submit</button>
+       </form>
+       </div>
+       <% }%>
+        <% if(locals.addMe){ %>
+        <div class="container">
+            <form action="/addMenu/<%= _id %>" method="post">
+             <fieldset>
+               <legend>ADD MENU</legend>
+               <div class="input-group">
+                 <label for="foodType">Food Type</label>
+                 <input type="text" id="categoryName" name="foodType"  required/>
+                 <label for="foodType">Food Pice</label>
+                 <input type="text" id="categoryName" name="foodPrice"  required/>
+                 <label for="foodType">Food Image</label>
+                 <input type="text" id="categoryName" name="foodImage"  required/>
+                 <label for="foodType">Add description</label>
+                 <input type="text" id="categoryName" name="description"  required/>
+               </div>
+             </fieldset>
+             <button type="submit">Submit</button>
+           </form>
+           </div>
+           <% } %>
+           <% if(locals.updateCat){ %>
+            <div class="container">
+                <form action="/updateCategory/<%= category._id %>" method="post">
+                 <fieldset>
+                   <legend>CHANGE NAME</legend>
+                   <div class="input-group">
+                     <label for="categoryName">Category Name</label>
+                     <input type="text" id="categoryName" name="categoryNameUpdate" value="<%= category.categoryName %>" required/>
+                   </div>
+                 </fieldset>
+                 <button type="submit">Submit</button>
+               </form>
+               </div>
+               <% }%>
+               <% if(locals.updateMe){  %>
+                <div class="container">
+                    <form action="/updateMenu/<%=category._id %>/<%= menu._id %>" method="post">
+                     <fieldset>
+                       <legend>UPDATE MENU</legend>
+                       <div class="input-group">
+                         <label for="foodType">Food Type</label>
+                         <input type="text" id="categoryName" name="foodTypeUpdate" value="<%= menu.foodType %>"  required/>
+                         <label for="foodType">Food Price</label>
+                         <input type="text" id="categoryName" name="foodPriceUpdate" value="<%= menu.price %>"/>
+                         <label for="foodType">Food Image</label>
+                         <input type="text" id="categoryName" name="foodImageUpdate" value="<%= menu.foodImage %>"  required/>
+                         <label for="foodType">Add description</label>
+                         <input type="text" id="categoryName" name="descriptionUpdate" value="<%= menu.description %>"  required/>
+                       </div>
+                     </fieldset>
+                     <button type="submit">Submit</button>
+                   </form>
+                   </div>
+                   <% }%>
+                   <% if(locals.addCar){ %>
+                    <div class="container">
+                        <form action="/addCarousel" method="post" enctype="multipart/form-data">
+                         <fieldset>
+                           <legend>ADD PHOTO</legend>
+                           <div class="input-group">
+                             <label for="categoryName"></label>
+                             <input type="file"  id="categoryName" name="carouselImage"  accept="images/*" required>
+                           </div>
+                         </fieldset>
+                         <button type="submit">Submit</button>
+                       </form>
+                       </div>
+                   <% } %>
+
+    
+</body>
+</html>

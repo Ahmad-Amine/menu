@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+      
+
+    <title>Al Amin Kitchen</title>
+  </head>
+  <% if(locals.mainCategory){ %>
+  <body class="grid" onload="btn('<%= mainCategory._id %>')">
+  <% }; %>
+    <div class="parent flex">
+      <div class="second">
+        <div class="container">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img
+                  src="assets\logo.jpg" />
+              </div>
+              <% if(locals.carousels){ %>
+              <% for(let i = carousels.length-1 ;  i >= 0 ; i--){ %>
+              <div class="item">
+                <img 
+                  src="data:image/<%=carousels[i].img.contentType%>;base64,
+                  <%=carousels[i].img.data.toString('base64')%>"
+                />
+              </div>
+              <% }; %>
+              <% }; %>
+            </div>
+
+            <a
+              class="left carousel-control"
+              href="#myCarousel"
+              data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="right carousel-control"
+              href="#myCarousel"
+              data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <div class="first-child">
+          <div class="restoname">
+            <h1 class="angkor-regular">KHALED AL AMIN KITCHEN</h1>
+          </div>
+          <div class="info">
+            <div class="location">
+              <i class="fa-solid fa-location-dot"></i>
+              <a
+                href="https://maps.app.goo.gl/harkwLV8XTPi8xiYA"
+                target="_blank"
+                ><span>Akkar-Lebanon</span></a
+              >
+            </div>
+            <div class="phone">
+              <i class="fa-brands fa-whatsapp" style="color: green;"></i>
+              <span><a href="https://wa.me/96103316863" target="_blank" style="color: black;text-decoration: none;">03 316 863</a></span>
+            </div>
+            
+            <!-- <div class="wifi">
+              <i class="fa-solid fa-wifi"></i>
+              <span>WiFi_Password123</span>
+            </div> -->
+          </div>
+          <div class="description">
+            <span>
+                Discover the Soulful Symphony of Lebanon in Every Bite – Our Kitchen, a Melody of Authentic Flavors, Timeless Traditions, and Culinary Elegance, Where Every Dish Tells a Story of Lebanese Love and Passion!
+            </span>
+          </div>
+          <div class="buttons">
+            <% if(locals.categories){ %>
+            <% categories.forEach((category)=>{ %>
+            <button onclick="btn('<%= category._id %>')" class="category" value="<%= category._id %>">
+              <span><%= category.categoryName %></span>
+            </button>
+            <% }); %>
+            <% }; %>
+          </div>
+
+
+          <div class="items">
+            <% if(locals.categories){ %>
+            <% (categories).forEach((category)=>{ %>
+            <% (category.menu).forEach((menu)=>{ %>
+            <div class="main_menu menu"  value="<%= category._id %>">
+              <div onclick="img('<%= menu._id %>')" class="figure">
+                <div class=img>
+                  <img
+                  src="<%= menu.foodImage %>"
+                  alt=""/>
+                </div>
+                <div class="flex h3">
+                  <h3><%= menu.foodType.toUpperCase() %>&nbsp;&nbsp;&nbsp;<span style="color: red;margin-top: 50%;margin-bottom: 50%;"><%= menu.price %></span></h3>
+                </div>
+              </div>
+              <div  id="<%= menu._id %>" class="figcaption"><%= menu.description %></div>
+            </div>          
+            <% }); %>
+            <% }); %>
+            <% }; %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+      function btn(id){
+        var btn = document.getElementsByClassName("category");
+        var img = document.getElementsByClassName("menu");
+
+        for (let i = 0; i < img.length; i++) {
+          img[i].getAttribute("value") === id ? img[i].style.display = "block" : img[i].style.display = "none";
+        };
+
+        for (let j = 0;j < btn.length; j++) {
+          btn[j].getAttribute("value") === id ? (btn[j].style.backgroundColor = "white" , btn[j].style.color = "tomato") : (btn[j].style.backgroundColor = "tomato" , btn[j].style.color = "white");
+        };
+      };
+
+      function img(id){
+        var figcaption = document.getElementById(id);
+        figcaption.classList.toggle("show");
+      };
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al Amin Kitchen</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* Flex table container */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+}
+
+/* Flex table row */
+.table-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* Flex table cell */
+.table-cell {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid tomato;
+  border-radius: 3px;
+  text-align: center;
+  width: 20%;
+}
+
+/* Flex table header cell */
+.table-header-cell {
+  font-weight: bold;
+}
+
+/* Adjust table header cell text alignment */
+@media only screen and (max-width: 600px) {
+  .table-header-cell, .table-cell {
+    text-align: center;
+  }
+}
+h1{
+    text-align: center;
+    color: tomato;
+}
+.container2{
+    margin-top: 100px;
+}
+.cells{
+    height: 100px;
+    width:100px;
+}
+.buttons{
+    width: 50px;
+    height: 25px;
+    background-color: tomato;
+    border-radius: 5px;
+    border: none;
+    float: right;
+    margin-top: 20px;
+    margin: 7px;
+}
+.menuImg{
+    height: 50px;
+    width: 50px;
+}
+.tags{
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+    <div class="container1">
+        <% if(locals.name){ %>
+        <h1><%= name %></h1>
+        <% }; %>
+        <div class="table-container">
+            <% if(locals.menu){ %>
+            <% menu.forEach((menu)=>{ %>
+           <div class="table-row">
+              <div class="table-cell"><%= menu.foodType %></div>
+              <div class="table-cell"><%= menu.price %></div>
+              <div class="table-cell"><img src="<%= menu.foodImage %>" class="menuImg"></div>
+              <div class="table-cell"><%= menu.description %></div>
+              <div class="table-cell"><a href="/updateMenu/<%= category._id %>/<%= menu._id %>" class="tags"><i class="material-icons" style="font-size:25px;color:red">update</i></a></div>
+              <div class="table-cell"><a href="/deleteMenu/<%= category._id %>/<%= menu._id %>" class="tags"><i class="material-icons" style="font-size:25px;color:red">delete</i></a></div>
+           </div>
+           <% }); %>
+           <% }; %>
+        </div>
+        <button  class="buttons"><a href="/admin" class="tags">Back</a></button>
+        <button  class="buttons"><a href="/addMenu/<%= category._id %>" class="tags">Add</a></button>
+    </div>
+</body>
+</html>
