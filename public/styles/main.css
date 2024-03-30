@@ -216,8 +216,10 @@ form {
 
 
 .flex h3{
-    font-size: xx-large;
-    margin: 50%;
+    font-size:x-large;
+    font-weight: bold;
+    margin-top: 50%;
+    margin-bottom: 50%;
     color:black;
     font-weight:750;
     width: 100%;
